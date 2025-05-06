@@ -2,7 +2,7 @@ import imageGrid from '../../assets/imageGrid.webp'
 
 const Lounge = () => {
   return (
-    <div className="lounge container flex">
+    <div id="seats" className="lounge container flex">
       <div className="sectionContainer grid">
         <div className="imgDiv">
           <img src={imageGrid} alt="" />

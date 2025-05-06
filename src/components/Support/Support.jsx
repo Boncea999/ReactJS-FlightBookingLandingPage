@@ -11,7 +11,7 @@ function Support() {
   }, [])
 
   return (
-    <div className="support container section">
+    <div id="offers" className="support container section">
       <div className="sectionContainer">
 
         <div className="titlesDiv">

@@ -52,12 +52,13 @@ const Navbar = () => {
         </div>
         <div className={active}>
           <ul className="menu flex">
-            <li onClick={removeNavBar} className="listItem">Home</li>
-            <li onClick={removeNavBar} className="listItem">About</li>
-            <li onClick={removeNavBar} className="listItem">Offers</li>
-            <li onClick={removeNavBar} className="listItem">Seats</li>
-            <li onClick={removeNavBar} className="listItem">Destinations</li>
+            <li onClick={removeNavBar} className="listItem"><a href="#home">Home</a></li>
+            <li onClick={removeNavBar} className="listItem"><a href="#about">About</a></li>
+            <li onClick={removeNavBar} className="listItem"><a href="#offers">Offers</a></li>
+            <li onClick={removeNavBar} className="listItem"><a href="#seats">Seats</a></li>
+            <li onClick={removeNavBar} className="listItem"><a href="#destinations">Destinations</a></li>
           </ul>
+
           <button className='btn flex btnOne'>Contact</button>
 
 

@@ -13,7 +13,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='home flex container'>
+    <div id="home" className='home flex container'>
 
       <div className="mainText">
         <h1 data-aos='fade-up' data-aos-duration='2500' >Start Planning Your Next Trip With Us</h1>

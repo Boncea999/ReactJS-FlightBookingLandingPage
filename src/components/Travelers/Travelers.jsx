@@ -41,7 +41,7 @@ const travelers = [
 
 const Travelers = () => {
   return (
-    <div className="travelers container section">
+    <div id="destinations" className="travelers container section">
       <div className="sectionContainer">
         <h2>Top travelers of this Month!</h2>
 

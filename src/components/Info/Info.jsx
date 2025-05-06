@@ -4,7 +4,7 @@ import { BsFillBookmarkFill } from 'react-icons/bs'
 
 const Info = () => {
   return (
-    <div className='info section'>
+    <div id="about" className='info section'>
       <div className="infoContainer container">
         <div className="titleDiv flex">
           <h2>Make memories of the World</h2>

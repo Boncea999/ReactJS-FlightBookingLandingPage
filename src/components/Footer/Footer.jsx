@@ -1,17 +1,17 @@
 import logo from '../../assets/logo.png'
 import { BsFacebook } from 'react-icons/bs'
-import { AiFillTwitterCircle } from 'react-icons/ai'
-import { FaTiktok } from 'react-icons/fa'
-import { AiFillYoutube } from 'react-icons/ai'
-import { FaPinterest } from 'react-icons/fa'
+import { AiFillTwitterCircle, AiFillYoutube } from 'react-icons/ai'
+import { FaTiktok, FaPinterest } from 'react-icons/fa'
 
 const Footer = () => {
   return (
     <div className="footer">
       <div className="sectionContainer container grid">
+
+        {/* Logo și Social */}
         <div className="gridOne">
           <div className="logoDiv">
-            <img src={logo} className="Logo" />
+            <img src={logo} alt="Logo" className="Logo" />
           </div>
           <p>Lorem ipsum dolor sit amet consectetur.</p>
           <div className="socialIcon flex">
@@ -21,64 +21,55 @@ const Footer = () => {
             <AiFillYoutube className='icon' />
             <FaPinterest className='icon' />
           </div>
+
+          <button
+            className="scrollTop"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            ↑ Back to Top
+          </button>
         </div>
 
+        {/* Linkuri - Information */}
         <div className="footerLinks">
           <span className="linkTitle">Information</span>
-          <li>
-            <a href="">Manage Booking</a>
-          </li>
-          <li>
-            <a href="">Flight Status</a>
-          </li>
-          <li>
-            <a href="">Check-In</a>
-          </li>
-          <li>
-            <a href="">Explore</a>
-          </li>
-          <li>
-            <a href="">Contact Us</a>
-          </li>
+          <ul>
+            <li><a href="#home">Manage Booking</a></li>
+            <li><a href="#offers">Flight Status</a></li>
+            <li><a href="#offers">Check-In</a></li>
+            <li><a href="#about">Explore</a></li>
+            <li><a href="#home">Contact Us</a></li>
+          </ul>
         </div>
 
+        {/* Linkuri - Services */}
         <div className="footerLinks">
-          <span className="linkTitle">Information</span>
-          <li>
-            <a href="">Chauffer</a>
-          </li>
-          <li>
-            <a href="">Our Partners</a>
-          </li>
-          <li>
-            <a href="">Destinations</a>
-          </li>
-          <li>
-            <a href="">Careers</a>
-          </li>
-          <li>
-            <a href="">Rules</a>
-          </li>
+          <span className="linkTitle">Services</span>
+          <ul>
+            <li><a href="#seats">Chauffeur</a></li>
+            <li><a href="#about">Our Partners</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#about">Careers</a></li>
+            <li><a href="#about">Rules</a></li>
+          </ul>
         </div>
 
+        {/* Linkuri - Quick Guide */}
         <div className="footerLinks">
           <span className="linkTitle">Quick Guide</span>
-          <li>
-            <a href="">FAQs</a>
-          </li>
-          <li>
-            <a href="">Features</a>
-          </li>
-          <li>
-            <a href="">Baggage</a>
-          </li>
-          <li>
-            <a href="">Route Map</a>
-          </li>
-          <li>
-            <a href="">Our Communities</a>
-          </li>
+          <ul>
+            <li><a href="#support">FAQs</a></li>
+            <li><a href="#about">Features</a></li>
+            <li><a href="#support">Baggage</a></li>
+            <li><a href="#destinations">Route Map</a></li>
+            <li><a href="#destinations">Our Communities</a></li>
+          </ul>
         </div>
+      </div>
+
+      {/* Copyright separat jos */}
+      <div className="copyRight">
+        <p>© {new Date().getFullYear()} Travel Agency. All rights reserved.</p>
       </div>
     </div>
   )
