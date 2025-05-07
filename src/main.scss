@@ -312,6 +312,28 @@ h2 {
 }
 
 // Search
+.searchHistory {
+  margin-top: 2rem;
+  background: #f0f4f7;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.historyItem {
+  margin-bottom: 1rem;
+}
+
+.flightResults {
+  margin-top: 2rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.flightItem {
+  margin-bottom: 1rem;
+}
+
 .search {
   .sectionContainer {
     width: 100%;
