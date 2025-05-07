@@ -209,6 +209,7 @@ h2 {
 
     @media screen and (max-width: 768px) {
       .navBarMenu {
+          scroll-behavior: smooth;
         position: absolute;
         background: $secondaryColor;
         padding: 1.5rem;
@@ -279,7 +280,9 @@ h2 {
   text-align: center;
   gap: 2rem;
   flex-direction: column;
-
+  html {
+    scroll-behavior: smooth;
+  }
   .mainText {
     color: $blackColor;
     font-weight: 700;

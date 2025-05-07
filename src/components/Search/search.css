@@ -1,0 +1,132 @@
+/* search.css */
+
+.section {
+    padding: 2rem;
+    background: #f5f7fa;
+  }
+  
+  .sectionContainer {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btns.flex {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .singleBtn {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #eee;
+    transition: background 0.3s;
+  }
+  
+  .singleBtn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  .searchInputs.flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .singleInput {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1 1 200px;
+  }
+  
+  .iconDiv {
+    background: #eee;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .texts h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .texts input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0.25rem;
+  }
+  
+  .btn {
+    background: #28a745;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background: #218838;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: 600;
+    margin: 1rem 0;
+  }
+  
+  .success-message {
+    color: green;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+  
+  .availableFlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .flight {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #fafafa;
+  }
+  
+  .reservationForm {
+    margin-top: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .reservationForm input {
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+  }
