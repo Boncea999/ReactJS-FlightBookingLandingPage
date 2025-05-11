@@ -1,4 +1,5 @@
 import './search.css';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
@@ -31,11 +32,30 @@ function Search() {
     { id: 9, airline: 'Airline 9', origin: 'București', destination: 'Arad', departure: '2025-07-09T13:00:00', arrival: '2025-07-09T15:00:00', price: 200, class: 'Economy' },
     { id: 10, airline: 'Airline 10', origin: 'Cluj-Napoca', destination: 'Timișoara', departure: '2025-07-10T17:30:00', arrival: '2025-07-10T19:30:00', price: 350, class: 'Business Class' }
   ];
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const show = urlParams.get('showFlights');
+    const flightId = urlParams.get('flight');
+
+    if (show === 'true') {
+      if (flightId) {
+        const selected = allFlights.find(f => f.id === parseInt(flightId));
+        if (selected) {
+          setAvailableFlights([{ ...selected, totalPrice: selected.price * travelers }]);
+          setShowFlights(true);
+          document.querySelector('.search.section.container')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        handleShowAllFlights();
+        document.querySelector('.search.section.container')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
 
   const validateReservation = () => {
     const { name, email, phone, password } = reservationDetails;
     const emailValid = /\S+@\S+\.\S+/.test(email);
-    const passValid = /^(?=.[a-z])(?=.[A-Z])(?=.*\W).{6,}$/.test(password);
+    const passValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/.test(password);
     if (!name || !email || !phone || !password) return 'All fields are required.';
     if (!emailValid) return 'Invalid email format.';
     if (!passValid) return 'Password must contain uppercase, lowercase, special character and be 6+ chars.';
@@ -48,7 +68,6 @@ function Search() {
       setError('Please fill in at least one search field.');
       return;
     }
-
     setLoading(true);
     const filtered = allFlights.filter(f =>
       (!location || f.origin.toLowerCase().includes(location.toLowerCase())) &&
@@ -70,9 +89,7 @@ function Search() {
     setShowFlights(true);
   };
 
-  const handleHideAllFlights = () => {
-    setShowFlights(false);
-  };
+  const handleHideAllFlights = () => setShowFlights(false);
 
   const handleSelectFlight = (id) => {
     setSelectedFlightId(id === selectedFlightId ? null : id);
@@ -142,7 +159,9 @@ function Search() {
               <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)} />
             </div>
           </div>
-          <button className="btn btnBlock flex" onClick={handleSearchFlights}>{loading ? 'Loading...' : 'Search Flights'}</button>
+          <button className="btn btnBlock flex" onClick={handleSearchFlights}>
+            {loading ? 'Loading...' : 'Search Flights'}
+          </button>
         </div>
 
         <div className="btns flex">

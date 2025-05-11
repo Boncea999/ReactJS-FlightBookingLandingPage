@@ -84,9 +84,17 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <button className='btn flex btnOne'>Contact</button>
+
+          {/* Contact buttons */}
+          <Link to="/contact" className='btn flex btnOne'>
+            Contact
+          </Link>
         </div>
-        <button className='btn flex btnTwo'>Contact</button>
+
+        <Link to="/contact" className='btn flex btnTwo'>
+          Contact
+        </Link>
+
         <div onClick={showNavBar} className="toggleIcon">
           <CgMenuGridO className='icon' />
         </div>
