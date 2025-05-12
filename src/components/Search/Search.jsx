@@ -1,6 +1,5 @@
 import './search.css';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { RxCalendar } from 'react-icons/rx';
@@ -19,6 +18,7 @@ function Search() {
   const [reservationDetails, setReservationDetails] = useState({ name: '', email: '', phone: '', password: '' });
   const [reservationSuccess, setReservationSuccess] = useState(false);
   const [showFlights, setShowFlights] = useState(false);
+  const [loggedUser, setLoggedUser] = useState(null);
 
   const allFlights = [
     { id: 1, airline: 'Airline 1', origin: 'București', destination: 'Cluj-Napoca', departure: '2025-07-01T10:00:00', arrival: '2025-07-01T12:00:00', price: 250, class: 'Economy' },
@@ -32,7 +32,11 @@ function Search() {
     { id: 9, airline: 'Airline 9', origin: 'București', destination: 'Arad', departure: '2025-07-09T13:00:00', arrival: '2025-07-09T15:00:00', price: 200, class: 'Economy' },
     { id: 10, airline: 'Airline 10', origin: 'Cluj-Napoca', destination: 'Timișoara', departure: '2025-07-10T17:30:00', arrival: '2025-07-10T19:30:00', price: 350, class: 'Business Class' }
   ];
+
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) setLoggedUser(user);
+
     const urlParams = new URLSearchParams(window.location.search);
     const show = urlParams.get('showFlights');
     const flightId = urlParams.get('flight');
@@ -108,13 +112,36 @@ function Search() {
       setError(validationError);
       return;
     }
-    setError('');
+
+    const userEmail = reservationDetails.email;
+    const reservation = {
+      ...availableFlights.find(f => f.id === selectedFlightId),
+      travelers,
+      name: reservationDetails.name,
+      phone: reservationDetails.phone,
+    };
+
+    const existing = JSON.parse(localStorage.getItem('reservations') || '{}');
+    const userReservations = existing[userEmail] || [];
+    userReservations.push(reservation);
+    existing[userEmail] = userReservations;
+
+    localStorage.setItem('reservations', JSON.stringify(existing));
+    localStorage.setItem('user', JSON.stringify({ email: userEmail, password: reservationDetails.password }));
+    setLoggedUser({ email: userEmail, password: reservationDetails.password });
     setReservationSuccess(true);
   };
 
   return (
     <div className="search section container">
       <div className="sectionContainer">
+        {loggedUser && (
+          <div className="user-info">
+            <p><strong>Logged in as:</strong> {loggedUser.email}</p>
+            <p><strong>Password:</strong> {loggedUser.password}</p>
+          </div>
+        )}
+
         <div className="btns flex">
           {['Economy', 'Business Class', 'First Class'].map(cl => (
             <div key={cl} className={`singleBtn ${flightClass === cl ? 'active' : ''}`} onClick={() => setFlightClass(cl)}>

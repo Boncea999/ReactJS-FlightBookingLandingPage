@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SiConsul } from 'react-icons/si';
@@ -16,9 +17,15 @@ const defaultItems = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [active, setActive] = useState('navBarMenu');
   const [noBg, addBg] = useState('navBarTwo');
   const [menuItems, setMenuItems] = useState(defaultItems);
+  const [user, setUser] = useState(() => {
+    const stored = localStorage.getItem('user');
+    return stored ? JSON.parse(stored) : null;
+  });
 
   useEffect(() => {
     const counts = JSON.parse(localStorage.getItem('menuClicks')) || {};
@@ -38,14 +45,10 @@ const Navbar = () => {
   const showNavBar = () => setActive('navBarMenu showNavBar');
   const removeNavBar = () => setActive('navBarMenu');
 
-  const handleClick = (id) => {
-    removeNavBar();
-    const current = JSON.parse(localStorage.getItem('menuClicks')) || {};
-    current[id] = (current[id] || 0) + 1;
-    localStorage.setItem('menuClicks', JSON.stringify(current));
-
-    const sorted = [...defaultItems].sort((a, b) => (current[b.id] || 0) - (current[a.id] || 0));
-    setMenuItems(sorted);
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/');
   };
 
   return (
@@ -66,8 +69,11 @@ const Navbar = () => {
           </li>
         </div>
         <div className="atb flex">
-          <span>Sign In</span>
-          <span>Sign Out</span>
+          {!user ? (
+            <Link to="/login">Sign In</Link>
+          ) : (
+            <span onClick={handleLogout} style={{ cursor: 'pointer' }}>Sign Out</span>
+          )}
         </div>
       </div>
 
@@ -84,16 +90,10 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-
-          {/* Contact buttons */}
-          <Link to="/contact" className='btn flex btnOne'>
-            Contact
-          </Link>
+          <Link to="/contact" className='btn flex btnOne'>Contact</Link>
         </div>
 
-        <Link to="/contact" className='btn flex btnTwo'>
-          Contact
-        </Link>
+        <Link to="/contact" className='btn flex btnTwo'>Contact</Link>
 
         <div onClick={showNavBar} className="toggleIcon">
           <CgMenuGridO className='icon' />

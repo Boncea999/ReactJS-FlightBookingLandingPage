@@ -21,7 +21,8 @@ import ArrivalServices from './components/Support/ArrivalServices';
 import Insurance from './components/Support/Insurance';
 import SupportNav from './components/Support/SupportNav';
 import ContactPage from './components/ContactPage/ContactPage';
-
+import MyBookings from './components/MyBookings/MyBookings';
+import Login from './components/Login/Login';
 function LayoutWrapper({ children }) {
   const location = useLocation();
   const isMainPage = location.pathname === '/';
@@ -63,6 +64,8 @@ function App() {
           <Route path="/support/insurance" element={<Insurance />} />
           <Route path="/support/arrival" element={<ArrivalServices />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/my-bookings" element={<MyBookings />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </LayoutWrapper>
     </Router>
