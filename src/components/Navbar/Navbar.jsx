@@ -70,11 +70,16 @@ const Navbar = () => {
         </div>
         <div className="atb flex">
           {!user ? (
-            <Link to="/login">Sign In</Link>
+            <Link to="/login" className="btn">Sign In</Link>
           ) : (
-            <span onClick={handleLogout} style={{ cursor: 'pointer' }}>Sign Out</span>
+            <>
+              <span onClick={handleLogout} style={{ cursor: 'pointer' }}>Sign Out</span>
+              <Link to="/add-account" className="btn">Sign Up</Link>
+
+            </>
           )}
         </div>
+
       </div>
 
       {/* Main bar */}

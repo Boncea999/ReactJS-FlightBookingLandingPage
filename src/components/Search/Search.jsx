@@ -5,35 +5,35 @@ import { RiAccountPinCircleLine } from 'react-icons/ri';
 import { RxCalendar } from 'react-icons/rx';
 
 function Search() {
-  const [location, setLocation] = useState('');
-  const [destination, setDestination] = useState('');
-  const [travelers, setTravelers] = useState(1);
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
-  const [flightClass, setFlightClass] = useState('');
-  const [availableFlights, setAvailableFlights] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [selectedFlightId, setSelectedFlightId] = useState(null);
-  const [reservationDetails, setReservationDetails] = useState({ name: '', email: '', phone: '', password: '' });
-  const [reservationSuccess, setReservationSuccess] = useState(false);
-  const [showFlights, setShowFlights] = useState(false);
-  const [loggedUser, setLoggedUser] = useState(null);
+const [location, setLocation] = useState('');
+const [destination, setDestination] = useState('');
+const [travelers, setTravelers] = useState(1);
+const [checkIn, setCheckIn] = useState('');
+const [checkOut, setCheckOut] = useState('');
+const [flightClass, setFlightClass] = useState('');
+const [availableFlights, setAvailableFlights] = useState([]);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState('');
+const [selectedFlightId, setSelectedFlightId] = useState(null);
+const [reservationDetails, setReservationDetails] = useState({ name: '', email: '', phone: '', password: '' });
+const [reservationSuccess, setReservationSuccess] = useState(false);
+const [showFlights, setShowFlights] = useState(false);
+const [loggedUser, setLoggedUser] = useState(null);
 
-  const allFlights = [
-    { id: 1, airline: 'Airline 1', origin: 'București', destination: 'Cluj-Napoca', departure: '2025-07-01T10:00:00', arrival: '2025-07-01T12:00:00', price: 250, class: 'Economy' },
-    { id: 2, airline: 'Airline 2', origin: 'București', destination: 'Timișoara', departure: '2025-07-02T09:00:00', arrival: '2025-07-02T11:00:00', price: 300, class: 'Business Class' },
-    { id: 3, airline: 'Airline 3', origin: 'Cluj-Napoca', destination: 'București', departure: '2025-07-01T14:00:00', arrival: '2025-07-01T16:00:00', price: 400, class: 'First Class' },
-    { id: 4, airline: 'Airline 4', origin: 'București', destination: 'Constanța', departure: '2025-07-03T08:00:00', arrival: '2025-07-03T10:00:00', price: 180, class: 'Economy' },
-    { id: 5, airline: 'Airline 5', origin: 'Iași', destination: 'Cluj-Napoca', departure: '2025-07-05T11:00:00', arrival: '2025-07-05T12:30:00', price: 220, class: 'Economy' },
-    { id: 6, airline: 'Airline 6', origin: 'București', destination: 'Oradea', departure: '2025-07-06T15:00:00', arrival: '2025-07-06T17:00:00', price: 280, class: 'Business Class' },
-    { id: 7, airline: 'Airline 7', origin: 'Cluj-Napoca', destination: 'București', departure: '2025-07-07T07:30:00', arrival: '2025-07-07T09:30:00', price: 250, class: 'Economy' },
-    { id: 8, airline: 'Airline 8', origin: 'Timișoara', destination: 'București', departure: '2025-07-08T10:15:00', arrival: '2025-07-08T12:15:00', price: 310, class: 'First Class' },
-    { id: 9, airline: 'Airline 9', origin: 'București', destination: 'Arad', departure: '2025-07-09T13:00:00', arrival: '2025-07-09T15:00:00', price: 200, class: 'Economy' },
-    { id: 10, airline: 'Airline 10', origin: 'Cluj-Napoca', destination: 'Timișoara', departure: '2025-07-10T17:30:00', arrival: '2025-07-10T19:30:00', price: 350, class: 'Business Class' }
-  ];
+const allFlights = [
+{ id: 1, airline: 'Airline 1', origin: 'București', destination: 'Cluj-Napoca', departure: '2025-07-01T10:00:00', arrival: '2025-07-01T12:00:00', price: 250, class: 'Economy' },
+{ id: 2, airline: 'Airline 2', origin: 'București', destination: 'Timișoara', departure: '2025-07-02T09:00:00', arrival: '2025-07-02T11:00:00', price: 300, class: 'Business Class' },
+{ id: 3, airline: 'Airline 3', origin: 'Cluj-Napoca', destination: 'București', departure: '2025-07-01T14:00:00', arrival: '2025-07-01T16:00:00', price: 400, class: 'First Class' },
+{ id: 4, airline: 'Airline 4', origin: 'București', destination: 'Constanța', departure: '2025-07-03T08:00:00', arrival: '2025-07-03T10:00:00', price: 180, class: 'Economy' },
+{ id: 5, airline: 'Airline 5', origin: 'Iași', destination: 'Cluj-Napoca', departure: '2025-07-05T11:00:00', arrival: '2025-07-05T12:30:00', price: 220, class: 'Economy' },
+{ id: 6, airline: 'Airline 6', origin: 'București', destination: 'Oradea', departure: '2025-07-06T15:00:00', arrival: '2025-07-06T17:00:00', price: 280, class: 'Business Class' },
+{ id: 7, airline: 'Airline 7', origin: 'Cluj-Napoca', destination: 'București', departure: '2025-07-07T07:30:00', arrival: '2025-07-07T09:30:00', price: 250, class: 'Economy' },
+{ id: 8, airline: 'Airline 8', origin: 'Timișoara', destination: 'București', departure: '2025-07-08T10:15:00', arrival: '2025-07-08T12:15:00', price: 310, class: 'First Class' },
+{ id: 9, airline: 'Airline 9', origin: 'București', destination: 'Arad', departure: '2025-07-09T13:00:00', arrival: '2025-07-09T15:00:00', price: 200, class: 'Economy' },
+{ id: 10, airline: 'Airline 10', origin: 'Cluj-Napoca', destination: 'Timișoara', departure: '2025-07-10T17:30:00', arrival: '2025-07-10T19:30:00', price: 350, class: 'Business Class' }
+];
 
-  useEffect(() => {
+useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) setLoggedUser(user);
 
@@ -80,9 +80,7 @@ function Search() {
       (!checkOut || f.arrival.slice(0, 10) <= checkOut) &&
       (!flightClass || f.class === flightClass)
     );
-    if (filtered.length === 0) {
-      setError('No flights found.');
-    }
+    if (filtered.length === 0) setError('No flights found.');
     setAvailableFlights(filtered.map(f => ({ ...f, totalPrice: f.price * travelers })));
     setLoading(false);
     setShowFlights(true);
@@ -106,31 +104,47 @@ function Search() {
     setReservationDetails(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleReserve = () => {
-    const validationError = validateReservation();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+ // păstrează totul identic până la handleReserve
+const handleReserve = () => {
+  const validationError = validateReservation();
+  if (validationError) {
+    setError(validationError);
+    return;
+  }
 
-    const userEmail = reservationDetails.email;
-    const reservation = {
-      ...availableFlights.find(f => f.id === selectedFlightId),
-      travelers,
-      name: reservationDetails.name,
-      phone: reservationDetails.phone,
-    };
+  const { name, email, password } = reservationDetails;
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const savedReservations = JSON.parse(localStorage.getItem('reservations') || '{}');
 
-    const existing = JSON.parse(localStorage.getItem('reservations') || '{}');
-    const userReservations = existing[userEmail] || [];
-    userReservations.push(reservation);
-    existing[userEmail] = userReservations;
+  if (!storedUser || storedUser.email !== email || storedUser.password !== password || storedUser.name !== name) {
+    setError('Datele nu corespund cu utilizatorul înregistrat.');
+    return;
+  }
 
-    localStorage.setItem('reservations', JSON.stringify(existing));
-    localStorage.setItem('user', JSON.stringify({ email: userEmail, password: reservationDetails.password }));
-    setLoggedUser({ email: userEmail, password: reservationDetails.password });
-    setReservationSuccess(true);
+  const selectedFlight = availableFlights.find(f => f.id === selectedFlightId);
+  if (!selectedFlight) {
+    setError('Zborul selectat nu a fost găsit.');
+    return;
+  }
+
+  const newReservation = {
+    ...selectedFlight,
+    travelers,
+    name: reservationDetails.name,
+    phone: reservationDetails.phone,
   };
+
+  const userReservations = savedReservations[email] || [];
+  userReservations.push(newReservation);
+  savedReservations[email] = userReservations;
+
+  localStorage.setItem('reservations', JSON.stringify(savedReservations));
+  localStorage.setItem('user', JSON.stringify({ name, email, password }));
+  setLoggedUser({ name, email, password });
+  setReservationSuccess(true);
+  setError('');
+};
+
 
   return (
     <div className="search section container">
@@ -151,6 +165,7 @@ function Search() {
         </div>
 
         <div className="searchInputs flex">
+          {/* Origin */}
           <div className="singleInput flex">
             <div className="iconDiv"><HiOutlineLocationMarker className="icon" /></div>
             <div className="texts">
@@ -158,6 +173,8 @@ function Search() {
               <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="From?" />
             </div>
           </div>
+
+          {/* Destination */}
           <div className="singleInput flex">
             <div className="iconDiv"><HiOutlineLocationMarker className="icon" /></div>
             <div className="texts">
@@ -165,6 +182,8 @@ function Search() {
               <input type="text" value={destination} onChange={e => setDestination(e.target.value)} placeholder="To?" />
             </div>
           </div>
+
+          {/* Travelers */}
           <div className="singleInput flex">
             <div className="iconDiv"><RiAccountPinCircleLine className="icon" /></div>
             <div className="texts">
@@ -172,6 +191,8 @@ function Search() {
               <input type="number" value={travelers} onChange={e => setTravelers(Math.max(1, parseInt(e.target.value) || 1))} />
             </div>
           </div>
+
+          {/* Check In */}
           <div className="singleInput flex">
             <div className="iconDiv"><RxCalendar className="icon" /></div>
             <div className="texts">
@@ -179,6 +200,8 @@ function Search() {
               <input type="date" value={checkIn} onChange={e => setCheckIn(e.target.value)} />
             </div>
           </div>
+
+          {/* Check Out */}
           <div className="singleInput flex">
             <div className="iconDiv"><RxCalendar className="icon" /></div>
             <div className="texts">
@@ -186,11 +209,14 @@ function Search() {
               <input type="date" value={checkOut} onChange={e => setCheckOut(e.target.value)} />
             </div>
           </div>
+
+          {/* Search */}
           <button className="btn btnBlock flex" onClick={handleSearchFlights}>
             {loading ? 'Loading...' : 'Search Flights'}
           </button>
         </div>
 
+        {/* Show/Hide Buttons */}
         <div className="btns flex">
           <button className="btn btnBlock flex" onClick={handleShowAllFlights}>Show All Flights</button>
           <button className="btn btnBlock flex" onClick={handleHideAllFlights}>Hide All Flights</button>
@@ -209,7 +235,11 @@ function Search() {
                 <p>Class: {flight.class}</p>
                 <p>Price/traveler: ${flight.price}</p>
                 <p>Total for {travelers}: ${flight.totalPrice}</p>
-                <button className="btn" onClick={() => handleSelectFlight(flight.id)}>Reserve</button>
+                {loggedUser ? (
+                  <button className="btn" onClick={() => handleSelectFlight(flight.id)}>Reserve</button>
+                ) : (
+                  <p className="warning-message">Autentifică-te pentru a rezerva.</p>
+                )}
 
                 {selectedFlightId === flight.id && (
                   <div className="reservationForm">

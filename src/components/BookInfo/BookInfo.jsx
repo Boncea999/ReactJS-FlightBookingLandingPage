@@ -17,9 +17,13 @@ const flights = [
 const formatFlight = (flight) => `${flight.origin} - ${flight.destination}`;
 
 const BookInfo = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', flight: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    flight: ''
+  });
   const [errors, setErrors] = useState({});
-  const [savedReservations, setSavedReservations] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,10 +36,6 @@ const BookInfo = () => {
         setFormData(prev => ({ ...prev, flight: formatFlight(found) }));
       }
     }
-
-    // Citire rezervări din localStorage
-    const saved = JSON.parse(localStorage.getItem('reservations') || '[]');
-    setSavedReservations(saved);
   }, [location.search]);
 
   const validate = () => {
@@ -52,6 +52,20 @@ const BookInfo = () => {
     const errs = validate();
     if (Object.keys(errs).length === 0) {
       const selectedFlight = flights.find(f => formatFlight(f) === formData.flight);
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      };
+      const reservations = JSON.parse(localStorage.getItem('reservations') || '{}');
+
+      if (!reservations[formData.email]) {
+        reservations[formData.email] = [];
+      }
+
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('reservations', JSON.stringify(reservations));
+
       navigate(`/?showFlights=true&flight=${selectedFlight?.id || ''}`);
     } else {
       setErrors(errs);
@@ -62,41 +76,45 @@ const BookInfo = () => {
     <div style={{ padding: '2rem', maxWidth: '600px', margin: 'auto' }}>
       <h2>Formular Rezervare Zbor</h2>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <input type="text" placeholder="Nume" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+        <input
+          type="text"
+          placeholder="Nume"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        />
         {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
 
-        <input type="email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+        <input
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
         {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
 
-        <input type="password" placeholder="Parola" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+        <input
+          type="password"
+          placeholder="Parolă"
+          value={formData.password}
+          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+        />
         {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
 
-        <select value={formData.flight} onChange={(e) => setFormData({ ...formData, flight: e.target.value })}>
-          <option value="">Selectează zbor</option>
-          {flights.map((f) => (
-            <option key={f.id} value={formatFlight(f)}>{formatFlight(f)} ({f.class})</option>
+        <select
+          value={formData.flight}
+          onChange={(e) => setFormData({ ...formData, flight: e.target.value })}
+        >
+          <option value="">-- Selectează un zbor --</option>
+          {flights.map(flight => (
+            <option key={flight.id} value={formatFlight(flight)}>
+              {formatFlight(flight)} ({flight.class})
+            </option>
           ))}
         </select>
         {errors.flight && <span style={{ color: 'red' }}>{errors.flight}</span>}
 
-        <button type="submit" className="btn" style={{ background: '#1e90ff', color: 'white', padding: '0.5rem', border: 'none', borderRadius: '4px' }}>
-          Trimite
-        </button>
+        <button type="submit">Trimite</button>
       </form>
-
-      {savedReservations.length > 0 && (
-        <div style={{ marginTop: '2rem' }}>
-          <h3>Zboruri rezervate</h3>
-          {savedReservations.map((res, idx) => (
-            <div key={idx} style={{ padding: '1rem', border: '1px solid #ccc', marginBottom: '1rem' }}>
-              <p><strong>Nume:</strong> {res.name}</p>
-              <p><strong>Email:</strong> {res.email}</p>
-              <p><strong>Telefon:</strong> {res.phone}</p>
-              <p><strong>Zbor:</strong> {res.flight} ({res.class})</p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

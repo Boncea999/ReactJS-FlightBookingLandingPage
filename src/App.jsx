@@ -23,6 +23,8 @@ import SupportNav from './components/Support/SupportNav';
 import ContactPage from './components/ContactPage/ContactPage';
 import MyBookings from './components/MyBookings/MyBookings';
 import Login from './components/Login/Login';
+import AddAccount from './components/AddAccount.jsx/AddAccount';
+import ViewAccounts from './components/ViewAccounts/ViewAccounts';
 function LayoutWrapper({ children }) {
   const location = useLocation();
   const isMainPage = location.pathname === '/';
@@ -66,6 +68,8 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/add-account" element={<AddAccount />} />
+          <Route path="/view-accounts" element={<ViewAccounts />} />
         </Routes>
       </LayoutWrapper>
     </Router>
